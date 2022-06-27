@@ -6,6 +6,7 @@ import { UsersList } from './UsersList';
 type User = {
   id: number;
   name: string;
+  type: string;
 };
 
 type State = {
@@ -13,9 +14,11 @@ type State = {
 };
 
 const usersFromServer = [
-  { id: 1, name: 'Anna' },
-  { id: 2, name: 'Laila' },
-  { id: 3, name: 'Lena' },
+  { id: 1, name: 'Anna', type: 'book' },
+  { id: 2, name: 'Laila', type: 'book' },
+  { id: 3, name: 'Lena', type: 'magazine' },
+  { id: 4, name: 'Petya', type: 'magazine' },
+  { id: 5, name: 'Kolya', type: 'magazine' },
 ];
 
 export class App extends React.Component<{}, State> {
@@ -23,27 +26,12 @@ export class App extends React.Component<{}, State> {
     users: usersFromServer,
   };
 
-  // addStudent = () => {
-  //   this.setState((prevState) => ({ studentsCount: prevState.studentsCount + 1 }));
-  // };
-
-  // removeStudent = () => {
-  //   this.setState((prevState) => ({ studentsCount: prevState.studentsCount - 1 }));
-  // };
-
-  // addEmployee = () => {
-  //   this.setState((prevState) => ({ employeesCount: prevState.employeesCount + 1 }));
-  // };
-
-  // removeEmployee = () => {
-  //   this.setState((prevState) => ({ employeesCount: prevState.employeesCount - 1 }));
-  // };
-
-  addUser = (name: string) => {
-    this.setState(prevState => {
+  addUser = (name: string, type: string) => {
+    this.setState((prevState) => {
       const newUser = {
         id: Math.max(...prevState.users.map(user => user.id)) + 1,
         name,
+        type,
       };
 
       return {
@@ -84,10 +72,17 @@ export class App extends React.Component<{}, State> {
     } = this.state;
 
     // eslint-disable-next-line no-console
-    console.log(users);
+    console.log('users', users);
 
     return (
-      <div className="">
+      <div
+        className=""
+        style={{
+          backgroundColor: 'red',
+          height: '100vh',
+          padding: '50px',
+        }}
+      >
         <NewUserForm
           onAdd={this.addUser}
         />

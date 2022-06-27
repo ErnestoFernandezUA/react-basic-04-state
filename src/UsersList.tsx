@@ -4,6 +4,7 @@ import { UserItem } from './UserItem';
 type User = {
   id: number;
   name: string;
+  type: string;
 };
 
 type Props = {
@@ -26,23 +27,6 @@ export const UsersList: React.FC<Props> = ({
             onDelete={onDelete}
             onRename={onRename}
           />
-          {/* {user.name}
-          <form
-            onSubmit={() => {}}
-          >
-            <input
-              type="text"
-              value={user.name}
-              onChange={(event) => onRename(user.id, event.target.value)}
-            />
-            <button type="submit">Save</button>
-          </form>
-          <button
-            type="button"
-            onClick={() => onDelete(user.id)}
-          >
-            Delete
-          </button> */}
         </li>
       ))}
     </ul>

@@ -3,6 +3,7 @@ import React from 'react';
 type User = {
   id: number;
   name: string;
+  type: string;
 };
 
 type Props = {
@@ -26,15 +27,24 @@ export class UserItem extends React.Component<Props, State> {
       id,
     } = this.state.user;
 
+    const {
+      onDelete,
+      onRename,
+    } = this.props;
+
     return (
       <>
-        {this.props.user.name}
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            this.props.onRename(id, name);
+            onRename(id, name);
           }}
         >
+          {this.props.user.id}
+          -
+          {this.props.user.name}
+          -
+          {this.props.user.type}
           <input
             type="text"
             value={name}
@@ -48,13 +58,13 @@ export class UserItem extends React.Component<Props, State> {
             }}
           />
           <button type="submit">Save</button>
+          <button
+            type="button"
+            onClick={() => onDelete(id)}
+          >
+            Delete
+          </button>
         </form>
-        <button
-          type="button"
-          onClick={() => this.props.onDelete(id)}
-        >
-          Delete
-        </button>
       </>
     );
   }
