@@ -1,5 +1,6 @@
 import React from 'react';
 import { TypePicker } from './TypePicker';
+import './NewUserForm.scss';
 
 const UserType = ['book', 'magazine', 'note'];
 
@@ -42,6 +43,7 @@ export class NewUserForm extends React.Component<Props, State> {
   render() {
     return (
       <form
+        className="NewUserForm"
         onSubmit={this.handleSubmit}
       >
         <input
@@ -52,17 +54,17 @@ export class NewUserForm extends React.Component<Props, State> {
             this.setState({ username: event.target.value });
           }}
         />
+        <TypePicker
+          types={UserType}
+          value={this.state.type}
+          onChange={this.setType}
+        />
         <button
           type="submit"
         >
           Add
         </button>
 
-        <TypePicker
-          types={UserType}
-          value={this.state.type}
-          onChange={this.setType}
-        />
       </form>
     );
   }
